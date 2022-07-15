@@ -5,6 +5,8 @@ from zipfile import ZipFile
 import requests
 from webdriver_manager.chrome import ChromeDriverManager
 from config import LOGGER
+from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
 
 def karakter_cevir(metin):
     tr_chars = {
@@ -55,6 +57,12 @@ def getUblockPath():
 
 def initAllThings():
     LOGGER.info("initilaizing required things...")
-    ChromeDriverManager().install()
+    chrome_options = Options()
+    chrome_options.add_argument(f'load-extension={getUblockPath()}')
+    chrome_options.add_argument("--lang=tr-TR")
+    chrome_options.add_argument("--headless")
+    chrome_options.headless = True
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+    driver.close()
     getUblockPath()
     LOGGER.info("initilaizing required things... Done.")
