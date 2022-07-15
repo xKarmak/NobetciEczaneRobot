@@ -40,7 +40,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
         il, ilce =  link.split(" ")
         x = runScraper(il, ilce)
         if not x:
-            duzenlenecek.edit_text("Bilgiler alınamadı. Lütfen bot sahibine bildiriniz.")
+            duzenlenecek.edit_text("Bilgiler alınamadı. Birkaç dakika sonra tekrar deneyin.")
         else:
             if Config.CHANNEL_OR_CONTACT:
                 x += f"\n\n{Config.CHANNEL_OR_CONTACT}"

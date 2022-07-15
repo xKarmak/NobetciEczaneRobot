@@ -42,7 +42,9 @@ log - send bot logs ❗ admin only
     - `HastanemyanimdaCom`: Free alternative. Fast.
     - `EczaneleriNet`: Free alternative. Fast.
     - `TrNobetcieczaneCom`: Free alternative. Fast.
-    - `EczaIo`: Free alternative. Slow because using selenium.
+    - `EczaIo`: Free alternative. Slow because using selenium. If you on local, install google-chrome and setup chromedriver first.
+- `CHROMEDRIVER_PATH`: For sselenium apis. Not required for others. Simply dont fill.
+- `GOOGLE_CHROME_BIN`: For sselenium apis. Not required for others. Simply dont fill.
 - `HEROKU_API_KEY`: For dyno usage in /stats - Optional.
 - `HEROKU_APP_NAME`: For dyno usage in /stats - Optional.
 - `CHANNEL_OR_CONTACT`: your users contact link. give your username. example: HuzunluArtemis
