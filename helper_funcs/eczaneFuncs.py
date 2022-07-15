@@ -11,17 +11,18 @@ from selenium import webdriver
 def karakter_cevir(metin):
     tr_chars = {
     "ç": "c",
-    "Ç": "C",
+    "Ç": "c",
     "ğ": "g",
-    "Ğ": "G",
+    "Ğ": "g",
     "ı": "i",
-    "İ": "I",
+    "İ": "i",
+    "I": "i",
     "ö": "o",
-    "Ö": "O",
+    "Ö": "o",
     "ş": "s",
-    "Ş": "S",
+    "Ş": "s",
     "ü": "u",
-    "Ü": "U",
+    "Ü": "u",
     }
     for karakter in tr_chars:
         metin = metin.replace(karakter, tr_chars[karakter])
