@@ -6,9 +6,9 @@
       "eczane",
       "nobetcieczane"
     ],
-    "repository": "https://github.com/HuzunluArtemis",
-    "success_url": "https://t.me/HuzunluArtemis",
-    "website": "https://t.me/HuzunluArtemis",
+    "repository": "https://github.com/HuzunluArtemis/NobetciEczaneRobot",
+    "success_url": "https://huzunluartemis.github.io/NobetciEczaneRobot/",
+    "website": "https://huzunluartemis.github.io/NobetciEczaneRobot/",
     "env": {
       "ENV": {
         "description": "Setting this to ANYTHING will enable webhooks when in env mode",
@@ -41,15 +41,23 @@
         "required": false
       }
     },
-    "formation": {
-      "worker": {
-        "quantity": 1
-      }
-    },
+    "stack": "heroku-22",
     "buildpacks": [
-      {
-        "url": "heroku/python"
-      }
-    ]
+        {
+          "url": "heroku/python"
+        },
+        {
+          "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+        },
+        {
+          "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
+        }
+    ],
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        }
+    }
   }
   
