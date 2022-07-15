@@ -25,6 +25,10 @@ class Config:
     USING_API  = os.environ.get('USING_API', "eczaneEczanelerGenTr")
     API_KEY = os.environ.get('API_KEY', "")
 
+    # chromedriver paths
+    CHROMEDRIVER_PATH = os.environ.get('CHROMEDRIVER_PATH', "/app/.chromedriver/bin/chromedriver")
+    GOOGLE_CHROME_BIN = os.environ.get('GOOGLE_CHROME_BIN', "/app/.apt/usr/bin/google-chrome")
+
     if USING_API.lower() in ["eczanecollectapi", "nosyapi"] and len(API_KEY) < 5:
         LOGGER.error("API_KEY girin. Bot kapanıyor çünkü küstü.")
         exit(1)

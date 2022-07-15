@@ -4,7 +4,7 @@ import urllib.parse
 from bs4 import BeautifulSoup
 import bs4
 import requests
-from config import Config
+from config import LOGGER, Config
 from helper_funcs.eczaneFuncs import getUblockPath, karakter_cevir, removespace
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
@@ -225,30 +225,34 @@ def eczaneEczaIo(il, ilce):
     il = karakter_cevir(il)
     ilce = karakter_cevir(ilce)
     url = f"https://ecza.io/{il}-{ilce}-nobetci-eczane"
-    # selenyum ayarları
-    chrome_options = Options()
-    chrome_options.add_argument(f'load-extension={getUblockPath()}')
-    chrome_options.add_argument("--lang=tr-TR")
-    chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-    driver.create_options()
-    driver.get(url)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    try:
+        # selenyum ayarları
+        chrome_options = Options()
+        chrome_options.add_argument(f'load-extension={getUblockPath()}')
+        chrome_options.add_argument("--lang=tr-TR")
+        chrome_options.add_argument("--headless")
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+        driver.create_options()
+        driver.get(url)
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    bugun:bs4.Tag = soup.find_all("div", attrs={"class": "section"})[0]
-    bugun = bugun.find_all("div", attrs={"class": "pharmacy-card-item pharmacy-card-item--type-inline"})
-    if not bugun: return None
-    tumu = []
-    for bak in bugun:
-        bu = ""
-        ad = bak.find("span", attrs={"class": "pharmacy-card-item__text pharmacy-card-item__text--pharmacy"})
-        ad = ad.find("a", attrs={"class": "we"}).text
-        telf = bak.find("mark").text
-        adres = bak.find_all("div", attrs={"class": "pharmacy-card-item__col"})[2]
-        adres = adres.find("span", attrs={"class": "pharmacy-card-item__text"}).text
-        
-        if ad: bu += removespace(ad)
-        if telf: bu += removespace(telf)
-        if adres: bu += removespace(adres, withnewline=False)
-        tumu.append(bu)
-    return "\n\n".join(tumu)
+        bugun:bs4.Tag = soup.find_all("div", attrs={"class": "section"})[0]
+        bugun = bugun.find_all("div", attrs={"class": "pharmacy-card-item pharmacy-card-item--type-inline"})
+        if not bugun: return None
+        tumu = []
+        for bak in bugun:
+            bu = ""
+            ad = bak.find("span", attrs={"class": "pharmacy-card-item__text pharmacy-card-item__text--pharmacy"})
+            ad = ad.find("a", attrs={"class": "we"}).text
+            telf = bak.find("mark").text
+            adres = bak.find_all("div", attrs={"class": "pharmacy-card-item__col"})[2]
+            adres = adres.find("span", attrs={"class": "pharmacy-card-item__text"}).text
+            
+            if ad: bu += removespace(ad)
+            if telf: bu += removespace(telf)
+            if adres: bu += removespace(adres, withnewline=False)
+            tumu.append(bu)
+        return "\n\n".join(tumu)
+    except Exception as e:
+        LOGGER.exception(e)
+        return None

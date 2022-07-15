@@ -57,12 +57,16 @@ def getUblockPath():
 
 def initAllThings():
     LOGGER.info("initilaizing required things...")
-    chrome_options = Options()
-    chrome_options.add_argument(f'load-extension={getUblockPath()}')
-    chrome_options.add_argument("--lang=tr-TR")
-    chrome_options.add_argument("--headless")
-    chrome_options.headless = True
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-    driver.close()
+    try:
+        chrome_options = Options()
+        chrome_options.add_argument(f'load-extension={getUblockPath()}')
+        chrome_options.add_argument("--lang=tr-TR")
+        chrome_options.add_argument("--headless")
+        chrome_options.headless = True
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+        driver.close()
+    except Exception as e:
+        LOGGER.exception(e)
+        LOGGER.error("Selenium will not work. Build failed.")
     getUblockPath()
     LOGGER.info("initilaizing required things... Done.")
