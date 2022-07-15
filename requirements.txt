@@ -1,0 +1,7 @@
+pyrogram
+tgcrypto
+heroku3
+psutil
+bs4
+selenium
+webdriver-manager
