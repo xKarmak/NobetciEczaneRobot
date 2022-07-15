@@ -5,3 +5,4 @@ psutil
 bs4
 selenium
 webdriver-manager
+lxml
