@@ -13,26 +13,28 @@ import http.client
 import json
 
 def eczaneCollectApi(il, ilce): # ok
-        main_api="https://api.collectapi.com/health/dutyPharmacy?"
-        url = main_api + urllib.parse.urlencode({"ilce": ilce, "il": il})
-        headers = {
-            'content-type': "application/json",
-            'authorization': f"apikey {Config.API_KEY}"
-            }
-        veri = (requests.post(url,headers=headers)).json()
-        if veri['success']:
-            ret = list()
-            for her in veri["result"]:
-                stro = ""
-                if her['name']: stro += her['name']
-                #if her['dist']: stro += f"\nİlçe: {str(her['dist'])}"
-                if her['address']: stro += f"\n{her['address']}"
-                if her['phone']: stro += f"\n{her['phone']}"
-                if her['loc']: stro += f"\nhttps://maps.google.com/maps?q={str(her['loc'])}" # &hl=es&z=14
-                ret.append(stro)
-            return "\n\n".join(ret)
-        else:
-            return None
+    il = karakter_cevir(il)
+    ilce = karakter_cevir(ilce)
+    main_api="https://api.collectapi.com/health/dutyPharmacy?"
+    url = main_api + urllib.parse.urlencode({"ilce": ilce, "il": il})
+    headers = {
+        'content-type': "application/json",
+        'authorization': f"apikey {Config.API_KEY}"
+        }
+    veri = (requests.post(url,headers=headers)).json()
+    if veri['success']:
+        ret = list()
+        for her in veri["result"]:
+            stro = ""
+            if her['name']: stro += her['name']
+            #if her['dist']: stro += f"\nİlçe: {str(her['dist'])}"
+            if her['address']: stro += f"\n{her['address']}"
+            if her['phone']: stro += f"\n{her['phone']}"
+            if her['loc']: stro += f"\nhttps://maps.google.com/maps?q={str(her['loc'])}" # &hl=es&z=14
+            ret.append(stro)
+        return "\n\n".join(ret)
+    else:
+        return None
 
 def eczaneNosyApi(il, ilce): # ok
     il = karakter_cevir(il)

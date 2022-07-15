@@ -26,7 +26,7 @@ def karakter_cevir(metin):
     }
     for karakter in tr_chars:
         metin = metin.replace(karakter, tr_chars[karakter])
-    return metin
+    return metin.lower()
 
 def removespace(str, withnewline=True):
     if not str: return None
