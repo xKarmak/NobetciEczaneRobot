@@ -22,7 +22,7 @@ class Config:
     CHANNEL_OR_CONTACT = f"@{CHANNEL_OR_CONTACT}"
     HEROKU_API_KEY = os.environ.get('HEROKU_API_KEY', "")
     HEROKU_APP_NAME = os.environ.get('HEROKU_APP_NAME', "")
-    USING_API  = os.environ.get('USING_API', "eczaneEczanelerGenTr")
+    USING_API  = os.environ.get('USING_API', "EczanelerGenTr")
     API_KEY = os.environ.get('API_KEY', "")
 
     # chromedriver paths
