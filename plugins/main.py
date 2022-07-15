@@ -42,8 +42,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
         if not x:
             duzenlenecek.edit_text("Bilgiler alınamadı. Birkaç dakika sonra tekrar deneyin.")
         else:
-            if Config.CHANNEL_OR_CONTACT:
-                x += f"\n\n{Config.CHANNEL_OR_CONTACT}"
+            if Config.CHANNEL_OR_CONTACT: x += f"\n\n🔥 {Config.CHANNEL_OR_CONTACT}"
             if len(x) > 3000:
                 with open('eczaneler.txt', 'w') as file: file.write(x)
                 with open('eczaneler.txt', 'rb') as doc:
